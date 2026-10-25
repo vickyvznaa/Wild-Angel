@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WILD ANGEL | Your Life. Your Rules. Your Era.</title>
+<style>
+:root {
+  --pink: #ff1685;
+  --light-pink: #ffe1ef;
+  --cream: #fffaf3;
+  --black: #17110f;
+  --brown: #8a5b42;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--black);
+  background-color: #d8bd98;
+  background-image: url("leopard-print.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+header {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 1200px;
+  background: var(--cream);
+  border: 2px solid var(--black);
+  border-radius: 18px;
+  box-shadow: 6px 6px 0 var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.logo {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 1000;
+  letter-spacing: 2px;
+}
+.logo span, .pink { color: var(--pink); }
+.tagline { font-size: 11px; letter-spacing: 3px; font-weight: bold; }
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 17px;
+  font-weight: 900;
+}
+.pink-button { background: var(--pink); color: white; }
+.black-button { background: var(--black); color: white; }
+.light-button { background: var(--light-pink); color: var(--black); }
+button:hover { transform: translateY(-2px); }
+.layout {
+  max-width: 1200px;
+  margin: 25px auto;
+  padding: 0 12px;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 20px;
+}
+nav, .card, .hero {
+  background: rgba(255, 250, 243, .97);
+  border: 2px solid var(--black);
+  border-radius: 22px;
+  box-shadow: 5px 5px 0 rgba(23,17,15,.9);
+}
+nav { padding: 14px; align-self: start; }
+.nav-title {
+  padding: 10px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.nav-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  margin: 4px 0;
+  border-radius: 12px;
+}
+.nav-link.active, .nav-link:hover {
+  background: var(--pink);
+  color: white;
+}
+main { min-width: 0; }
+.hero { padding: clamp(24px, 4vw, 42px); }
+.eyebrow {
+  color: var(--pink);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+h1 {
+  font-size: clamp(42px, 7vw, 82px);
+  line-height: .95;
+  margin: 18px 0;
+  letter-spacing: -2px;
+}
+h2 { font-size: 27px; }
+h3 { margin-top: 0; }
+p { line-height: 1.6; }
+.hero p { max-width: 650px; color: #65524a; }
+.section { display: none; }
+.section.active { display: block; }
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 28px 0 14px;
+  gap: 12px;
+}
+.section-title h2 { margin: 0; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+.card { padding: 20px; min-width: 0; }
+.full { grid-column: 1 / -1; }
+.field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d8bfc8;
+  border-radius: 12px;
+  background: white;
+  margin: 5px 0;
+}
+.row { display: flex; gap: 8px; }
+.row .field { min-width: 0; }
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px;
+  background: white;
+  border: 1px solid #ead8dc;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+.item span { flex: 1; overflow-wrap: anywhere; }
+.item.done span {
+  text-decoration: line-through;
+  color: #998b8b;
+}
+.item input { accent-color: var(--pink); }
+.delete {
+  border: 0;
+  background: var(--light-pink);
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+.muted { color: #76645e; font-size: 13px; }
+.big-number { font-size: 38px; font-weight: 1000; }
+.progress {
+  height: 10px;
+  border-radius: 99px;
+  background: #f1dbe5;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.progress div {
+  height: 100%;
+  width: 0;
+  background: var(--pink);
+  transition: width .2s;
+}
+.timer {
+  font-size: 65px;
+  font-weight: 1000;
+  text-align: center;
+  margin: 20px 0;
+}
+.center { text-align: center; }
+footer {
+  margin-top: 25px;
+  background: var(--black);
+  color: white;
+  text-align: center;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+@media(max-width: 760px) {
+  header { margin: 10px; flex-wrap: wrap; }
+  .layout { grid-template-columns: 1fr; }
+  nav { display: flex; overflow-x: auto; gap: 5px; }
+  .nav-title { display: none; }
+  .nav-link { white-space: nowrap; width: auto; }
+}
+@media(max-width: 500px) {
+  .grid { grid-template-columns: 1fr; }
+  .full { grid-column: auto; }
+  .row { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">WILD <span>ANGEL</span>™</div>
+    <div class="tagline">YOUR LIFE. YOUR RULES. YOUR ERA.</div>
+  </div>
+  <button class="pink-button" onclick="showSection('planner')">＋ PLAN MY DAY</button>
+</header>
+
+<div class="layout">
+<nav>
+  <div class="nav-title">YOUR WORLD</div>
+  <button class="nav-link active" data-section="home">💋 HOME</button>
+  <button class="nav-link" data-section="glow">🎀 THE GLOW UP</button>
+  <button class="nav-link" data-section="academy">📚 IT GIRL ACADEMY</button>
+  <button class="nav-link" data-section="planner">🐆 DIVA PLANNER</button>
+  <button class="nav-link" data-section="angel">👼 ANGEL ENERGY</button>
+  <button class="nav-link" data-section="dream">💎 THE DREAM LIFE</button>
+</nav>
+
+<main>
+<section id="home" class="section active">
+  <div class="hero">
+    <div class="eyebrow">✦ YOUR NEXT CHAPTER STARTS HERE ✦</div>
+    <h1>WELCOME BACK,<br><span class="pink">ANGEL.</span></h1>
+    <p>You don't have to be perfect. You're here to become someone you're proud of. Make a plan, learn something, and do one thing future-you will thank you for.</p>
+    <button class="pink-button" onclick="showSection('planner')">PLAN MY DAY ✦</button>
+    <button class="black-button" onclick="showSection('glow')">MY GLOW-UP PLAN</button>
+  </div>
+  <div class="section-title"><h2>YOUR WORLD</h2><span>🐆 WILD ERA</span></div>
+  <div class="grid">
+    <div class="card">
+      <h3>🎯 TODAY'S TASKS</h3>
+      <div id="homeTasks" class="muted">Your daily mission starts here.</div>
+    </div>
+    <div class="card">
+      <h3>✨ HABITS COMPLETED</h3>
+      <div class="big-number" id="habitCount">0 / 0</div>
+      <div class="progress"><div id="habitBar"></div></div>
+      <button class="light-button" onclick="showSection('glow')">CHECK IN →</button>
+    </div>
+    <div class="card">
+      <h3>💎 YOUR GOALS</h3>
+      <div class="big-number" id="goalCount">0</div>
+      <p class="muted">Dream big. Start small.</p>
+      <button class="light-button" onclick="showSection('dream')">MY DREAMS →</button>
+    </div>
+    <div class="card">
+      <h3>🌷 DAILY REMINDER</h3>
+      <p>Progress, not perfection. You can be ambitious and still give yourself a break.</p>
+    </div>
+  </div>
+</section>
+
+<section id="planner" class="section">
+  <div class="hero">
+    <div class="eyebrow">01 / ACHIEVE</div>
+    <h1>THE DIVA <span class="pink">PLANNER.</span></h1>
+    <p>Get it out of your head and onto the page. Choose what matters and make a realistic plan.</p>
+  </div>
+  <div class="section-title"><h2>YOUR DAILY MISSION</h2></div>
+  <div class="card">
+    <form id="taskForm" class="row">
+      <input id="taskInput" class="field" placeholder="What needs to get done, angel?" required maxlength="140">
+      <button class="pink-button">ADD TASK</button>
+    </form>
+    <div id="taskList"></div>
+  </div>
+  <div class="grid" style="margin-top:15px">
+    <div class="card">
+      <h3>🧺 BRAIN DUMP</h3>
+      <textarea id="brainDump" class="field" rows="6" placeholder="Write everything on your mind..."></textarea>
+      <button class="pink-button" onclick="saveBrainDump()">SAVE</button>
+    </div>
+    <div class="card">
+      <h3>🎒 TOMORROW PREP</h3>
+      <form id="prepForm" class="row">
+        <input id="prepInput" class="field" placeholder="Pack your bag, charge laptop..." required>
+        <button class="pink-button">ADD</button>
+      </form>
+      <div id="prepList"></div>
+    </div>
+  </div>
+</section>
+
+<section id="glow" class="section">
+  <div class="hero">
+    <div class="eyebrow">02 / BECOME</div>
+    <h1>THE <span class="pink">GLOW UP.</span></h1>
+    <p>Build confidence, routines, and skills that help you feel good about the person you're becoming.</p>
+  </div>
+  <div class="grid" style="margin-top:15px">
+    <div class="card">
+      <h3>🎀 MY HABITS</h3>
+      <form id="habitForm" class="row">
+        <input id="habitInput" class="field" placeholder="Add a habit..." required>
+        <button class="pink-button">ADD</button>
+      </form>
+      <div id="habitList"></div>
+    </div>
+    <div class="card">
+      <h3>🪞 CONFIDENCE CHALLENGE</h3>
+      <p id="challenge">Share one idea or ask a question today.</p>
+      <button class="light-button" onclick="newChallenge()">ANOTHER CHALLENGE</button>
+      <button class="pink-button" onclick="alert('Trying is a win. Be proud of yourself!')">I DID IT!</button>
+    </div>
+  </div>
+</section>
+
+<section id="academy" class="section">
+  <div class="hero">
+    <div class="eyebrow">03 / LEARN</div>
+    <h1>IT GIRL <span class="pink">ACADEMY.</span></h1>
+    <p>Brains, curiosity, and useful skills are always in style.</p>
+  </div>
+  <div class="grid" style="margin-top:15px">
+    <div class="card">
+      <h3>⏱️ STUDY LOUNGE</h3>
+      <p class="muted">Choose a focus session and work on one thing at a time.</p>
+      <select id="minutes" class="field">
+        <option value="15">15 minutes</option>
+        <option value="25" selected>25 minutes</option>
+        <option value="45">45 minutes</option>
+        <option value="60">60 minutes</option>
+      </select>
+      <div class="timer" id="timer">25:00</div>
+      <div class="center">
+        <button class="pink-button" id="startTimer">START</button>
+        <button class="black-button" onclick="resetTimer()">RESET</button>
+      </div>
+      <p class="muted center" id="timerMessage">One focused session is a win.</p>
+    </div>
+    <div class="card">
+      <h3>🧠 SKILLS I WANT TO LEARN</h3>
+      <form id="skillForm" class="row">
+        <input id="skillInput" class="field" placeholder="Coding, Spanish, cooking..." required>
+        <button class="pink-button">ADD</button>
+      </form>
+      <div id="skillList"></div>
+    </div>
+  </div>
+</section>
+
+<section id="angel" class="section">
+  <div class="hero">
+    <div class="eyebrow">04 / CHARACTER</div>
+    <h1>ANGEL <span class="pink">ENERGY.</span></h1>
+    <p>Confidence is how you show up. Character is how you treat yourself and other people. Both matter.</p>
+  </div>
+  <div class="grid" style="margin-top:15px">
+    <div class="card">
+      <h3>👼 THE ANGEL CODE</h3>
+      <div id="valuesList"></div>
+    </div>
+    <div class="card">
+      <h3>🌙 DAILY REFLECTION</h3>
+      <label for="reflection">What are you proud of today?</label>
+      <textarea id="reflection" class="field" rows="5" placeholder="Today, I'm proud that..."></textarea>
+      <button class="pink-button" onclick="saveReflection()">SAVE REFLECTION</button>
+      <p class="muted" id="reflectionMessage"></p>
+    </div>
+  </div>
+</section>
+
+<section id="dream" class="section">
+  <div class="hero">
+    <div class="eyebrow">05 / YOUR FUTURE</div>
+    <h1>THE DREAM <span class="pink">LIFE.</span></h1>
+    <p>Big dreams become manageable when
